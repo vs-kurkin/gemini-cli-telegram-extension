@@ -20,7 +20,7 @@ This extension provides a set of tools to interact with the Telegram Bot API dir
 To install the extension, run the following command in your Gemini CLI:
 
 ```bash
-/extension install https://github.com/vs-kurkin/gemini-cli-telegram-extension.git
+/extension install https://github.com/VSKurkin/gemini-cli-telegram-extension.git
 ```
 
 **Note:** Your Gemini CLI must be configured to allow installing third-party extensions.
@@ -166,7 +166,7 @@ To set up the development environment, follow these steps:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/vs-kurkin/gemini-cli-telegram-extension.git
+    git clone https://github.com/VSKurkin/gemini-cli-telegram-extension.git
     cd gemini-cli-telegram-extension
     ```
 
