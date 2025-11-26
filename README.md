@@ -49,22 +49,25 @@ This extension requires a Telegram Bot API token. You can provide it in one of t
 
 ## Usage
 
-You can use the provided tools in your Gemini CLI prompts.
+To use the tools provided by this extension, you need to make a tool call in your prompt. The Gemini CLI will execute the tool call and return the result.
 
 **Example 1: Send a message**
-```
-/prompt telegram:send_message chat_id="your-chat-id" text="Hello from Gemini!"
-```
+
+To send a message, make a tool call to `telegram:send_message` with the `chat_id` and `text` parameters.
+
+> telegram:send_message(chat_id="your-chat-id", text="Hello from Gemini!")
 
 **Example 2: Read new messages**
-```
-/prompt telegram:read
-```
+
+To read new messages, make a tool call to `telegram:read`.
+
+> telegram:read()
 
 **Example 3: Send a photo**
-```
-/prompt telegram:send_photo chat_id="your-chat-id" photo_path="/path/to/your/photo.jpg"
-```
+
+To send a photo, make a tool call to `telegram:send_photo`.
+
+> telegram:send_photo(chat_id="your-chat-id", photo_path="/path/to/your/photo.jpg")
 
 ## Available Tools
 
