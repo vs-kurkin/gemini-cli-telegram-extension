@@ -11,8 +11,28 @@ permissions:
 
 jobs:
   build-and-release:
-    name: Build for Linux
-    runs-on: self-hosted
+    name: Build for ${{ matrix.platform }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            platform: linux
+            arch: x64
+            binary_name: telegram
+            asset_name: linux.x64.telegram.tar.gz
+          - os: windows-latest
+            platform: win32
+            arch: x64
+            binary_name: telegram.exe
+            asset_name: win32.x64.telegram.zip
+          - os: macos-14
+            platform: darwin
+            arch: arm64
+            binary_name: telegram
+            asset_name: darwin.arm64.telegram.tar.gz
+
     steps:
     - uses: actions/checkout@v4
 
@@ -33,15 +53,22 @@ jobs:
 
     - name: Prepare gemini-extension.toml
       run: |
-        python scripts/prepare_release.py linux
+        python scripts/prepare_release.py ${{ matrix.platform }}
 
-    - name: Create Archive
+    - name: Create Archive (Unix)
+      if: runner.os != 'Windows'
       run: |
         cd dist
-        tar -czf ../linux.x64.telegram.tar.gz telegram gemini-extension.toml
+        tar -czf ../${{ matrix.asset_name }} ${{ matrix.binary_name }} gemini-extension.toml
+
+    - name: Create Archive (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        cd dist
+        Compress-Archive -Path ${{ matrix.binary_name }}, gemini-extension.toml -DestinationPath ..\${{ matrix.asset_name }}
 
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: linux.x64.telegram.tar.gz
+        files: ${{ matrix.asset_name }}
