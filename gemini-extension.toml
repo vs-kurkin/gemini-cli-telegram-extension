@@ -1,0 +1,130 @@
+# .gemini/extensions/telegram/gemini-extension.toml
+name = "telegram"
+description = "Tools for interacting with Telegram."
+
+[[tool]]
+name = "telegram:send_message"
+description = "Sends a text message."
+command = "python extensions/telegram/src/client.py send_message"
+[tool.parameters]
+required = ["chat_id", "text"]
+[tool.parameters.properties.chat_id]
+type = "string"
+description = "Chat ID."
+[tool.parameters.properties.text]
+type = "string"
+description = "The text of the message."
+
+[[tool]]
+name = "telegram:read"
+description = "Reads new messages."
+command = "python extensions/telegram/src/client.py read_messages"
+[tool.parameters]
+[tool.parameters.properties.timeout]
+type = "integer"
+description = "Timeout for waiting for updates."
+[tool.parameters.properties.chat_id]
+type = "string"
+description = "Chat ID to filter messages from."
+[tool.parameters.properties.offset]
+type = "integer"
+description = "Offset for get_updates."
+
+[[tool]]
+name = "telegram:get_me"
+description = "Gets information about the bot."
+command = "python extensions/telegram/src/client.py get_me"
+
+[[tool]]
+name = "telegram:get_chat"
+description = "Gets information about a chat."
+command = "python extensions/telegram/src/client.py get_chat"
+[tool.parameters]
+required = ["chat_id"]
+[tool.parameters.properties.chat_id]
+type = "string"
+description = "Chat ID."
+
+[[tool]]
+name = "telegram:edit_message_text"
+description = "Edits a text message."
+command = "python extensions/telegram/src/client.py edit_message_text"
+[tool.parameters]
+required = ["chat_id", "message_id", "text"]
+[tool.parameters.properties.chat_id]
+type = "string"
+description = "Chat ID."
+[tool.parameters.properties.message_id]
+type = "integer"
+description = "Message ID."
+[tool.parameters.properties.text]
+type = "string"
+description = "The new text of the message."
+
+[[tool]]
+name = "telegram:delete_message"
+description = "Deletes a message."
+command = "python extensions/telegram/src/client.py delete_message"
+[tool.parameters]
+required = ["chat_id", "message_id"]
+[tool.parameters.properties.chat_id]
+type = "string"
+description = "Chat ID."
+[tool.parameters.properties.message_id]
+type = "integer"
+description = "Message ID."
+
+[[tool]]
+name = "telegram:send_photo"
+description = "Sends a photo."
+command = "python extensions/telegram/src/client.py send_photo"
+[tool.parameters]
+required = ["chat_id", "photo_path"]
+[tool.parameters.properties.chat_id]
+type = "string"
+description = "Chat ID."
+[tool.parameters.properties.photo_path]
+type = "string"
+description = "Path to the photo file."
+[tool.parameters.properties.caption]
+type = "string"
+description = "Caption for the photo."
+
+[[tool]]
+name = "telegram:send_document"
+description = "Sends a document."
+command = "python extensions/telegram/src/client.py send_document"
+[tool.parameters]
+required = ["chat_id", "document_path"]
+[tool.parameters.properties.chat_id]
+type = "string"
+description = "Chat ID."
+[tool.parameters.properties.document_path]
+type = "string"
+description = "Path to the document file."
+[tool.parameters.properties.caption]
+type = "string"
+description = "Caption for the document."
+
+[[tool]]
+name = "telegram:get_chat_administrators"
+description = "Gets a list of chat administrators."
+command = "python extensions/telegram/src/client.py get_chat_administrators"
+[tool.parameters]
+required = ["chat_id"]
+[tool.parameters.properties.chat_id]
+type = "string"
+description = "Chat ID."
+
+[[tool]]
+name = "telegram:answer_callback_query"
+description = "Answers a callback query."
+command = "python extensions/telegram/src/client.py answer_callback_query"
+[tool.parameters]
+required = ["callback_query_id"]
+[tool.parameters.properties.callback_query_id]
+type = "string"
+description = "Callback query ID."
+[tool.parameters.properties.text]
+type = "string"
+description = "Text of the notification."
