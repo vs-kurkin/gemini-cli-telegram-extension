@@ -1,6 +1,6 @@
 {
   "name": "telegram",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Telegram extension for Gemini CLI",
   "repository": "https://github.com/VSKurkin/gemini-cli-telegram-extension.git",
   "tool": {
