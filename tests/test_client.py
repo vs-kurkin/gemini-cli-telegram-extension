@@ -6,7 +6,7 @@ import asyncio
 import unittest
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from extensions.telegram.src.client import (
+from src.client import (
     CommandDispatcher,
     TelegramBot,
     TelegramBotAuthError,
@@ -58,7 +58,7 @@ class TestTelegramBot(unittest.TestCase):
         mock_bot.return_value.edit_message_text = AsyncMock()
         bot = TelegramBot(token="test_token")
         result = asyncio.run(bot.edit_message_text(chat_id="123", message_id=456, text="new text"))
-        self.assertEqual(result["status"], "Сообщение успешно отредактировано.")
+        self.assertEqual(result["status"], "Message successfully edited.")
 
     @patch("telegram.Bot")
     def test_delete_message_successful(self, mock_bot):
@@ -66,9 +66,9 @@ class TestTelegramBot(unittest.TestCase):
         mock_bot.return_value.delete_message = AsyncMock()
         bot = TelegramBot(token="test_token")
         result = asyncio.run(bot.delete_message(chat_id="123", message_id=456))
-        self.assertEqual(result["status"], "Сообщение успешно удалено.")
+        self.assertEqual(result["status"], "Message successfully deleted.")
 
-    @patch("extensions.telegram.src.client.open", new_callable=unittest.mock.mock_open, read_data=b"photodata")
+    @patch("src.client.open", new_callable=unittest.mock.mock_open, read_data=b"photodata")
     @patch("telegram.Bot")
     def test_send_photo_successful(self, mock_bot, mock_open):
         """Tests that a photo is sent successfully."""
@@ -77,7 +77,7 @@ class TestTelegramBot(unittest.TestCase):
         result = asyncio.run(bot.send_photo(chat_id="123", photo_path="photo.jpg"))
         self.assertEqual(result["message_id"], 123)
 
-    @patch("extensions.telegram.src.client.open", new_callable=unittest.mock.mock_open, read_data=b"docdata")
+    @patch("src.client.open", new_callable=unittest.mock.mock_open, read_data=b"docdata")
     @patch("telegram.Bot")
     def test_send_document_successful(self, mock_bot, mock_open):
         """Tests that a document is sent successfully."""
