@@ -41,6 +41,8 @@ jobs:
     if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
+      - name: Create archives
+        run: python scripts/prepare_release.py --archive
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v4
         env:
