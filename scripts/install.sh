@@ -15,7 +15,7 @@ EXTENSION_NAME="telegram"
 mkdir -p "$GEMINI_EXTENSIONS_DIR"
 
 # Create a symbolic link to the extension's directory.
-ln -s "$SCRIPT_DIR" "$GEMINI_EXTENSIONS_DIR/$EXTENSION_NAME"
+ln -s "$(dirname "$SCRIPT_DIR")" "$GEMINI_EXTENSIONS_DIR/$EXTENSION_NAME"
 
 echo "Telegram extension installed successfully."
 echo "Please restart the Gemini CLI to use the extension."
